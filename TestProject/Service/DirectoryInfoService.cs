@@ -11,6 +11,11 @@ namespace TestProject.Service
 {
     public class DirectoryInfoService : IDirectoryInfoService
     {
+        /// <summary>
+        /// Get info about directory and all subfiles and subdirectories
+        /// </summary>
+        /// <param name="directoryName">Directory path</param>
+        /// <returns>Directory info</returns>
         public Folder GetDirectoryInfo(string directoryName)
         {
             string dir = directoryName;
@@ -30,10 +35,12 @@ namespace TestProject.Service
                 }
             }
 
+            DirectoryInfo dirInf = new DirectoryInfo(dir);
+
             if (!dirIsDrive)
             {
-                f.Name = new DirectoryInfo(dir).Name;
-                f.Date = new DirectoryInfo(dir).CreationTime;
+                f.Name = dirInf.Name;
+                f.Date = dirInf.CreationTime;
             }
 
             f.Files = new List<DirectoryFile>();

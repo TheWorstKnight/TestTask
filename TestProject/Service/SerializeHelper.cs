@@ -13,14 +13,20 @@ namespace TestProject.Service
 {
     public class SerializeHelper : ISerializeHelper
     {
-        public void SerializeToJson<T>(T collection, string path)
+        /// <summary>
+        /// Converts obj to json format and writes it in file in path destination
+        /// </summary>
+        /// <typeparam name="T">Any reference type</typeparam>
+        /// <param name="obj">Object to serialize</param>
+        /// <param name="path">Json file destination path</param>
+        public void SerializeToJson<T>(T obj, string path) where T : class
         {
             string dir = path;
             
             if (new DirectoryInfo(dir).Exists)
             {
                 dir += "\\result.json";
-                string json = JsonConvert.SerializeObject(collection, Formatting.Indented);
+                string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
                 File.WriteAllText(dir, json);
             }
             else throw new ArgumentException();

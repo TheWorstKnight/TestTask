@@ -8,6 +8,6 @@ namespace TestProject.Interfaces
 {
     public interface ISerializeHelper 
     {
-        void SerializeToJson<T>(T collection, string path);
+        void SerializeToJson<T>(T obj, string path)where T:class;
     }
 }
